@@ -1,0 +1,61 @@
+h3. Pull Request
+
+----
+
+https://github.com/Lululemon/{{REPO}}/pull/{{PR}}
+
+h3. Relevant Tickets
+
+e.g.
+[NCE-620]
+
+----
+
+h3. Commands
+
+----
+
+h5. Report Command
+
+
+{code:java}
+inv run-report --report-type deploy-summary --cf-type {{STACK}} -P {{PR}}
+{code}
+
+
+h5. Move S3 Artifacts Command
+
+
+{code:java}
+inv push-artifact-to-prod --cf-type {{STACK}} -P {{PR}}
+{code}
+
+h5. Deploy to preview Command
+
+
+{code:java}
+inv update --cf-type {{STACK}} --label preview --account-name prod -P {{PR}}
+{code}
+
+
+h5. Deploy to prod Command
+
+
+{code:java}
+inv update --cf-type {{STACK}} --label prod --account-name prod -P {{PR}}
+{code}
+
+h5. Clear Cache
+
+
+{code:java}
+inv clear-akamai -t FE -l prod
+{code}
+
+h5. Revert Command
+
+
+
+{code:java}
+inv update --cf-type {{STACK}} --label preview --account-name prod -P {{PR}}
+{code}
